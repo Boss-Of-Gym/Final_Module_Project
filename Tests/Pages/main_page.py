@@ -11,3 +11,7 @@ class MainPage(BasePage):
     
     def should_be_login_link(self):
         assert self.is_element_present(*MainPageLocators.LOGIN_LINK), "login link is not present"
+
+    def go_to_add_to_basket(self):
+        BUTTON_ADD_TO_BASKET = self.browser.find_element(*MainPageLocators.BUTTON_ADD_BASKET)
+        BUTTON_ADD_TO_BASKET.click()

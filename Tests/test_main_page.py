@@ -14,3 +14,9 @@ def test_should_login_link(browser):
     page = MainPage(browser, link)
     page.open()
     page.should_be_login_link()
+
+def test_should_add_book_in_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+    page = MainPage(browser, link)
+    page.open()
+    page.go_to_add_to_basket()
