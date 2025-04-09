@@ -1,10 +1,8 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
-import math, time
+import math
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoAlertPresentException
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 class ProductPage(BasePage):
 
@@ -34,7 +32,6 @@ class ProductPage(BasePage):
     def compare_basket_and_product_price(self):
         PRICE_BOOK = self.browser.find_element(*ProductPageLocators.PRICE_BOOK).text
         BASKET_PRICE = self.browser.find_element(*ProductPageLocators.BASKET_PRICE).text
-        # time.sleep(240)
         assert PRICE_BOOK == BASKET_PRICE, "Book price is not equal basket price"
 
     def go_to_add_to_basket(self):
@@ -57,4 +54,11 @@ class ProductPage(BasePage):
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
-        
+
+    def should_not_be_success_message(self):
+       assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_success_message_is_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is disappeared, but should not be"
